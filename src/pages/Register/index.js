@@ -4,6 +4,7 @@ import { useState,useEffect } from 'react';
 import { fetch_userinfo } from '../../redux/user';
 import { useDispatch,useSelector } from 'react-redux';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import {toast } from 'react-toastify';
 const Register = () => {
 
@@ -11,7 +12,8 @@ const Register = () => {
 
 
     const dispatch = useDispatch();
-    const {userinfo:{user}} = useSelector(state => state.user);
+    const {userinfo} = useSelector(state => state.user);
+    const navigate = useNavigate();
 
 const [data, setData] = useState([]);
 
@@ -20,22 +22,6 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [message, setMessage] = useState('');
 
-
-const handlechange = e => {
-    const inputValue = e.target.value;
-    console.log(inputValue);
-    
-    if (e.target.name === 'name') {
-        setName(inputValue);
-    }
-    if (e.target.name === 'email') {
-        setEmail(inputValue);
-    }
-    if (e.target.name === 'password') {
-        setPassword(inputValue);
-    }
-   
-  };
 
 
 
@@ -50,7 +36,11 @@ const handleSubmit = (e) => {
     })
     .then(res => {
         console.log(res);
-        dispatch(fetch_userinfo(res.data));
+        // save  res.data in local storage
+        localStorage.setItem('usertoken',res.data.token);
+     const savelocal =  localStorage.setItem('user',JSON.stringify(res.data.user));
+        dispatch(fetch_userinfo());
+      // dispatch(fetch_userinfo(JSON.parse(localStorage.getItem('user')))); // in same time update data in redux store
 
 
 if(res.data.message){
@@ -59,12 +49,14 @@ if(res.data.message){
 
 }
 
-// if error response show error message toast
+
+setTimeout(() => {
+    navigate('/');
+}, 2000);
 
 
-
-        setData(res.data);
-        console.log('data in set----->',data);
+      //  setData(res.data);
+       // console.log('data in set----->',data);
         setMessage(res.data.message);
         setName('');
         setEmail('');
@@ -88,7 +80,7 @@ if(res.data.message){
 
 
 <div>
-<h1>Register Page {name} </h1>
+<h1>Register Page {userinfo.name} </h1>
 </div>
 
 
