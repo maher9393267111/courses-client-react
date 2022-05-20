@@ -3,12 +3,14 @@ import axios from 'axios';
 
 import { useDispatch,useSelector } from 'react-redux';
 import { useState, useEffect,useRef } from 'react';
+import { fetch_userinfo } from '../../redux/user';
 import {toast } from 'react-toastify';
 import {UploadOutlined }
 from '@ant-design/icons';
 
 import { useParams } from 'react-router-dom';
-import {Input} from '@chakra-ui/react'
+
+import {Input,Button} from '@chakra-ui/react'
 
 const Userprofile = () => {
 
@@ -40,6 +42,10 @@ const [imagefile,setImagefile] = useState('');
 
 
 const [showimage,setShowimage] = useState('');
+
+const [name,setName] = useState('');
+const [email,setEmail] = useState('');
+const [password,setPassword] = useState('');
 
 
 
@@ -90,25 +96,20 @@ const userid =userinfo._id
 
 
 
-const senddata = API.put(`/updateUser/${userid}`,{image:imageobje})
+const senddata = API.put(`/updateUser/${userid}`,{image:imageobje,name,email,password}).then(res => {
+    
+    console.log("res",res);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    dispatch(fetch_userinfo());
+    toast.success(res.data.message);
+    setImagefile('');
+    //setShowimage('');
+ 
 
-
-
-
-
-// const ressend = await axios.put(`${apiURL}/${userid}`,config,imageobje).then(res => {
-//     console.log("ressend", res);
-//     if(res.data.message){
-//         toast.success(res.data.message);
-//     }
-//     else{
-//         toast.error(res.data.message);
-//     }
-// }).catch(err => {
-//     console.log("err", err);
-//     toast.error(err.response.data.mesage);
-// });
-
+    }).catch(err => {
+        console.log("err",err);
+        toast.error(err.response.data.message);
+    })
 
 
 
@@ -141,13 +142,14 @@ const handleClickfile = (event) => {
 </div>
 
 
-<div className=' grid grid-cols-12'>
+<div className=' grid grid-cols-12 mt-[60px]'>
 
 
 
 
 {/* -----left---- */}
-<div className=' lg:col-span-4 sm:col-span-12'>
+<div className=' lg:col-span-4 
+sm:col-span-12'>
 
 
 {/* ----flex image and info start0 */}
@@ -160,7 +162,7 @@ const handleClickfile = (event) => {
 
 <div className=' w-[250px] h-[250px]'>
 
-{userinfo.image ? <img src={userinfo.image} alt=""/> : <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""/>}
+{userinfo.image ? <img src={userinfo.image.secure_url} alt=""/> : <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""/>}
 
 
 
@@ -180,6 +182,8 @@ const handleClickfile = (event) => {
 <h1 className='font-bold'>Name : <span className='bg-green-300 p-2 rounded-2xl  ml-3'>{userinfo.name}</span></h1>
 
 
+
+<h1 className='font-bold'>Name : <span className='bg-green-300 p-2 rounded-2xl  ml-3'>{userinfo.email}</span></h1>
 
 
 
@@ -223,7 +227,7 @@ update {userinfo.name} Profile
 
 <div>
 
-<div className='image-upload'>
+<div className='image-upload mt-6 mb-12'>
 
 <button
 type='submit'
@@ -241,11 +245,17 @@ className='  hidden' ref={fileref} />
 
 {/* --show image after upload image to cloudinary */}
 
-<button
+<Button
+fontWeight={'bold'}
+backgroundColor={'#00bcd4'}
+marginLeft={'55px'}
+rounded={'3xl'}
+
+
 
 type='submit'
 onClick={handleclick}
->send to cloudinary</button>
+>send to cloudinary</Button>
 
 <div>
 
@@ -257,6 +267,96 @@ onClick={handleclick}
 
 
 </div>
+
+{/* ---inputs  upload---- */}
+
+
+
+<div className=' mt-6  '>
+
+<div>
+
+<form className=" text-center ">
+          <div className="mb-[40px] mx-auto mt-[30px] w-[100%] text-center ml-[20px] mr-[22px]">
+            <label
+              class="block text-xl text-gray-700 font-bold mb-2"
+              for="name"
+            >
+              Name
+            </label>
+            <input
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              class="shadow appearance-none w-[54%] border   rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              placeholder={    userinfo.name}
+            />
+          </div>
+
+          {/* -------email--- */}
+
+          <div className="mb-[40px] mx-auto mt-[30px] w-[100%] text-center ml-[20px] mr-[22px]">
+            <label
+              class="block text-gray-700 text-xl font-bold mb-2"
+              for="emaillabel"
+            >
+              Email
+            </label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              class="shadow appearance-none w-[54%] border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="emallabel"
+              type="email"
+              placeholder={    userinfo.email}
+            />
+          </div>
+
+          {/* -pass--- */}
+
+          <div className="mb-[40px] mx-auto mt-[30px] w-[100%] text-center ml-[20px] mr-[22px]">
+            <label
+              class="block text-gray-700 text-xl font-bold mb-2"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              class="shadow appearance-none w-[54%] border rounded-2xl  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="password"
+                placeholder={    userinfo.password}
+            />
+          </div>
+
+          <div className=" text-[22px] font-bold ">
+            <button
+             onClick={handleclick}
+              type="submit"
+              className=" bg-green-600  mb-6 text-center text-white p-3 rounded-2xl hover:text-black"
+            >
+              {" "}
+              click to Update{" "}
+            </button>
+          </div>
+        </form>
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
 
 
 </div>
