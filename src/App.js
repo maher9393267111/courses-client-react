@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import {ToastContainer} from 'react-toastify';
 import Navbar from './components/navbar';
 import AdminDasboard from './pages/admin/dashboard';
+import Userprofile from './pages/userprofile';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -39,6 +40,7 @@ function App() {
 <Route path='/login' element={<Login />} />
 
 <Route path='/admindash' element={<AdminDasboard />} />
+<Route path='/userprofile/:id' element={<Userprofile />} />
 
 
 

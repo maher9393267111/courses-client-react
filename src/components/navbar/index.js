@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {GrSearch} from 'react-icons/gr';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 // import { Menu } from 'antd';
@@ -31,6 +32,9 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     const [activeclass, setActiveclass] = useState('');
+    const dispatch = useDispatch();
+
+    const { userinfo } = useSelector((state) => state.user);
 
 
     // handleclicked class
@@ -134,7 +138,16 @@ className={ ` ${activeclass === 'home' ? 'active ' : " "}  self-center   `}>
         {isOpen ? 'userInfo' : 'userInfo'}
       </MenuButton>
       <MenuList>
-        <MenuItem>profile</MenuItem>
+        <MenuItem>
+        <Link to={`userprofile/${userinfo._id}`}>
+
+        profile
+        </Link>
+        
+        </MenuItem>
+
+
+
         <MenuItem > your courses</MenuItem>
         <MenuItem > your cart Courses</MenuItem>
         <MenuItem > your wishlist</MenuItem>
