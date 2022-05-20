@@ -10,6 +10,7 @@ message:'',
 change:false,
 obj:{},
 arr:[],
+id:'',
 
 
    
@@ -19,6 +20,7 @@ arr:[],
     open_modal: (state, action) => {
  
         state.togglemodal = true;
+        
     
     },
 

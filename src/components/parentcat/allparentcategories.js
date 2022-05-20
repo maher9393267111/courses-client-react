@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { open_modal, close_modal } from "../../redux/diff";
+import {parentcat_byid} from '../../redux/parentcategory';
 
 import {DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import Updateparentcat from "./updateparentcat";
@@ -11,10 +12,20 @@ const Allparentcategories = () => {
   const { allparentcategories } = useSelector((state) => state.parentcategory);
 
   
-  const  openModal = () => {
+  const  openModal = (parencatid) => {
 
-dispatch(open_modal());
-console.log("open modal");
+
+dispatch(parentcat_byid(parencatid));
+
+
+
+    dispatch(open_modal());
+    console.log("open modal"); 
+
+
+
+
+
 
   }
 
@@ -62,7 +73,7 @@ className=" w-[66px] h-[77px]"
 
 <p className=" self-center">
 <DeleteOutlined
- onClick={openModal}
+ onClick={()=>openModal(parentcat._id)}
 
 className='   text-blue-400 cursor-pointer  hover:text-red-500  text-2xl font-bold' />
 </p>

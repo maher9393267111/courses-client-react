@@ -3,7 +3,7 @@ import { Modal, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { open_modal,close_modal} from '../../redux/diff';
 
-const Modalcomp = ({children,isModalVisible,  setIsModalVisible}) => {
+const Modalcomp = ({children,title}) => {
 
 
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Modalcomp = ({children,isModalVisible,  setIsModalVisible}) => {
     }
 
     return (
-        <Modal title="Basic Modal" visible={togglemodal} onOk={handleOk} onCancel={handleOk}>
+        <Modal title={title} visible={togglemodal} onOk={handleOk} onCancel={handleOk}>
        
 
 {children}
