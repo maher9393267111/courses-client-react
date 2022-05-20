@@ -1,4 +1,6 @@
 import React from 'react';
+import Adminsidebar from './adminsidebar';
+import {Box,Flex,Wrap,WrapItem,Avatar,Button,HStack,Input} from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -23,15 +25,52 @@ navigate('/');
 
     return (
         <div>
-<h1> Admin Dashboard</h1>
-
-<h2>{userinfo.role}</h2>
-
 
 <div>
 
+<Box p={4} color='white'  paddingLeft={'30px'} fontSize={'22px'}  w={'100%'} bg='tomato'> ADMIN Dashboard</Box>
 
 </div>
+
+
+
+
+<div className='grid ga-4 grid-cols-12'>
+
+
+
+{/* -------sidebar--- */}
+
+
+<div className=' col-span-3  lg:col-span-2'>
+
+<Adminsidebar />
+
+
+</div>
+
+
+
+{/* ---content- */}
+
+
+<div className='col-span-9 ml-5'>
+
+Content
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
 
             
         </div>

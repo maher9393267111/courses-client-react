@@ -34,7 +34,7 @@ const Navbar = () => {
     const [activeclass, setActiveclass] = useState('');
     const dispatch = useDispatch();
 
-    const { userinfo } = useSelector((state) => state.user);
+    const { userinfo,token } = useSelector((state) => state.user);
 
 
     // handleclicked class
@@ -61,8 +61,11 @@ const [isOpen, setIsOpen] = useState(false);
 <div className='  col-span-3 '>
 
 <div className='ml-[50px] flex gap-11  w-[100%] pt-[10px] h-[70px] rounded-full'>
+  <Link to='/' >
+
 <img  className=' h-[100%] rounded-full' src="https://previews.123rf.com/images/marylia17/marylia171706/marylia17170600025/79641527-vector-internet-learning-enseignement-logo-de-cours-en-ligne-ic%C3%B4ne.jpg" alt="" />
 
+  </Link>
 <h1 className=' w-[140px] mt-[13px] 
 font-bold self-center text-md lg:visible sm:invisible'> MY Courses Site</h1>
 
@@ -129,6 +132,8 @@ className={ ` ${activeclass === 'home' ? 'active ' : " "}  self-center   `}>
     </Link>
    
 </li>
+
+{ token && 
 <li>
 
 <Menu>
@@ -159,6 +164,7 @@ className={ ` ${activeclass === 'home' ? 'active ' : " "}  self-center   `}>
 
 </li>
 
+  }
 
 
 <li

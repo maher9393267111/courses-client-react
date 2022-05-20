@@ -31,4 +31,16 @@ code {
 }
 
 
+.m{
+
+  @apply mt-[12px]  mb-[12px]  
+}
+
+
+.p{
+
+  @apply  pt-[12px]  pb-[12px]
+}
+
+
 }

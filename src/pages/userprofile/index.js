@@ -240,6 +240,8 @@ update {userinfo.name} Profile
 
 <div>
 
+    {/* -------image upload start------- */}
+
 <div className='image-upload mt-6 mb-12'>
 
 <button
@@ -256,9 +258,15 @@ onChange= {handleChangeImages}
 className='  hidden' ref={fileref} />
 
 
+
+
+
+
+
+
 {/* --show image after upload image to cloudinary */}
 
-<Button
+{/* <Button
 fontWeight={'bold'}
 backgroundColor={'#00bcd4'}
 marginLeft={'55px'}
@@ -268,11 +276,11 @@ rounded={'3xl'}
 
 type='submit'
 onClick={handleclick}
->send to cloudinary</Button>
+>send to cloudinary</Button> */}
 
-<div>
+<div className=' w-[175px] h-[200px]'>
 
-<img src={showimage} alt="" />
+<img src={userinfo.image.secure_url} alt="" />
 
 </div>
 
