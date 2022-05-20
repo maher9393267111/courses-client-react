@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { useDispatch,useSelector } from 'react-redux';
 import { useState, useEffect,useRef } from 'react';
+import {toast } from 'react-toastify';
 import {UploadOutlined }
 from '@ant-design/icons';
 
@@ -11,11 +12,37 @@ import {Input} from '@chakra-ui/react'
 
 const Userprofile = () => {
 
+
+    const { id } = useParams();
+    console.log('id',id);
+    const dispatch = useDispatch();
+    const { userinfo,token } = useSelector((state) => state.user);
+
+
+    const apiURL= `http://localhost:5000/api/auth/updateUser`;
+
+    const API = axios.create({ baseURL: 'http://localhost:5000/api/auth' });
+
+    API.interceptors.request.use((req) => {
+      if (token) {
+        req.headers.Authorization = `Bearer ${token}`;
+        //req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+      }
+    
+      return req;
+    });
+
+
+
+
 const fileref = useRef();
 const [imagefile,setImagefile] = useState('');
 
 
 const [showimage,setShowimage] = useState('');
+
+
+
 
 // handle image upload file change
 
@@ -47,8 +74,42 @@ const uploadRes1 = await axios.post(
 
   const { url, secure_url, public_id } = uploadRes1.data;
 
+  const imageobje ={}
+
+    imageobje.secure_url = secure_url;
+    imageobje.public_id = public_id;
+
+
   setShowimage(url)
   console.log("showimage------>", showimage);
+
+
+// send this image to backend database to update user profile image
+
+const userid =userinfo._id
+
+
+
+const senddata = API.put(`/updateUser/${userid}`,{image:imageobje})
+
+
+
+
+
+// const ressend = await axios.put(`${apiURL}/${userid}`,config,imageobje).then(res => {
+//     console.log("ressend", res);
+//     if(res.data.message){
+//         toast.success(res.data.message);
+//     }
+//     else{
+//         toast.error(res.data.message);
+//     }
+// }).catch(err => {
+//     console.log("err", err);
+//     toast.error(err.response.data.mesage);
+// });
+
+
 
 
 
@@ -58,10 +119,7 @@ const uploadRes1 = await axios.post(
 
 
 
-    const { id } = useParams();
-    console.log('id',id);
-    const dispatch = useDispatch();
-    const { userinfo } = useSelector((state) => state.user);
+   
 
 
 // click button to upload file
@@ -113,7 +171,7 @@ const handleClickfile = (event) => {
 
 <div className='sm:text-center lg:text-left text-xl mb-[22px] font-bold'>
     <h1>
-        User Information
+        User Information 
     </h1>
 </div>
 
