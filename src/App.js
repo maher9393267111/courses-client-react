@@ -4,6 +4,8 @@ import Home from './pages/home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import {ToastContainer} from 'react-toastify';
+import Navbar from './components/navbar';
+import AdminDasboard from './pages/admin/dashboard';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -11,14 +13,22 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
+
+<Router>
+
      <div>
 
-<h1 className=' text-2xl p-4 bg-blue-300 text-center font-bold'>Courses App</h1>
+
+<div>
+<Navbar />
+
+</div>
+
 
 <ToastContainer theme="dark" />
 
 
-<Router>
+
 
 
 <Routes>
@@ -28,6 +38,8 @@ function App() {
 <Route path='/register' element={<Register />} />
 <Route path='/login' element={<Login />} />
 
+<Route path='/admindash' element={<AdminDasboard />} />
+
 
 
 
@@ -36,13 +48,15 @@ function App() {
 
 
 
-</Router>
+
 
 
 
 
 
      </div>
+  
+     </Router>
     </div>
   );
 }

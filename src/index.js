@@ -4,16 +4,19 @@ import './index.css';
 import App from './App';
 import store from "./redux/store";
 import 'antd/dist/antd.css';
+import theme from "./theme";
 import { Provider } from "react-redux";
 import 'react-toastify/dist/ReactToastify.css';
 
 import reportWebVitals from './reportWebVitals';
-
+import { ChakraProvider } from '@chakra-ui/react'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <Provider store={store}>
+      <ChakraProvider>
   <App />
+  </ChakraProvider>
   </Provider>
   </React.StrictMode>
 );

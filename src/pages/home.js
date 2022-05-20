@@ -21,7 +21,7 @@ const Home = () => {
 <div>
 
 
-<h1>form data {userinfo.name}</h1>
+<h1>form data {userinfo.role}</h1>
 
 
 
