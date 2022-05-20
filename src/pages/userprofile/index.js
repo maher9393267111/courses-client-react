@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+
 import { useDispatch,useSelector } from 'react-redux';
 import { useState, useEffect,useRef } from 'react';
 import { fetch_userinfo } from '../../redux/user';
@@ -21,7 +22,7 @@ const Userprofile = () => {
     const { userinfo,token } = useSelector((state) => state.user);
 
 
-    const apiURL= `http://localhost:5000/api/auth/updateUser`;
+   
 
     const API = axios.create({ baseURL: 'http://localhost:5000/api/auth' });
 
@@ -58,6 +59,9 @@ const handleChangeImages = (event) => {
     setImagefile(fileUploaded);
     console.log("files-main-images", imagefile);
 
+    //------------------
+
+
 
   };
 
@@ -66,6 +70,15 @@ const handleChangeImages = (event) => {
 
 const handleclick = async (event) => {
     event.preventDefault();
+
+
+// delete old image from cloudinary
+
+const image = userinfo.image.public_id;
+console.log("image", image);
+// destroy old image from cloudinary
+const oldimagedata = API.post(`/removeimage`,{image:image} );
+
 
 const formData = new FormData();
 formData.append('file', imagefile);
@@ -183,7 +196,7 @@ sm:col-span-12'>
 
 
 
-<h1 className='font-bold'>Name : <span className='bg-green-300 p-2 rounded-2xl  ml-3'>{userinfo.email}</span></h1>
+<h1 className='font-bold mt-12'>Email : <span className='bg-green-300 p-2 rounded-2xl mt-7  ml-3'>{userinfo.email}</span></h1>
 
 
 
