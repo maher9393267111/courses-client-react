@@ -25,7 +25,7 @@ const Parentcategory = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState([]);
 
-
+const  [obj,setObj] = useState({});
   const API = axios.create({ baseURL: "http://localhost:5000/api/subcat" });
 
   API.interceptors.request.use((req) => {
@@ -68,7 +68,10 @@ const Parentcategory = () => {
       API.post("/prac", {
         image: image,
       }).then((res) => {
-        console.log(res);
+       // console.log(res);
+        console.log(res.data.subsaved);
+        setObj(res?.data?.subsaved);
+        console.log("obj",obj);
       });
   
     } catch (error) {
@@ -110,6 +113,11 @@ onClick={sendimages}
 >upload</button>
 
 </div>
+
+
+
+
+
 
 
     </div>
