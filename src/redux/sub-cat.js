@@ -4,7 +4,7 @@ export const subcategorySlice = createSlice({
   name: "subcategory",
   initialState: {
 //userinfo:JSON.parse(localStorage.getItem('user')),
-subcategories:JSON.parse(localStorage.getItem('subcat')),
+subcategories:   JSON.parse(localStorage.getItem('subcat')) ? JSON.parse(localStorage.getItem('subcat')) : [],
 singlesubcategory:{},
 currentcreted:{},  // for edit
 togglesub:false,

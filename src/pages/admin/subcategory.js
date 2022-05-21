@@ -144,7 +144,7 @@ const Parentcategory = () => {
                   {/* fetch_all_subcategory */}
 
                   <Select onChange={(e) => setCatid(e.target.value)}>
-                    {allparentcategories.map((item) => {
+                    {allparentcategories?.map((item) => {
                       return <option value={item._id}>{item.name}</option>;
                     })}
                   </Select>
