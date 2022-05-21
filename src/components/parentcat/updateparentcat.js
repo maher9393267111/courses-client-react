@@ -202,13 +202,7 @@ const handleClickfile = (event) => {
                       ref={fileref}
                     />
 
-                    <div className=" w-[75px] h-[20px]">
-
-                    {singleparentcategory.image && 
-<img className="w-12 h-12" src={  singleparentcategory?.image.secure_url } alt="" />
-
-}
-                    </div>
+                
                   </div>
 
                   {/* -----end image upload---  */}

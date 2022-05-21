@@ -68,3 +68,6 @@ singlecat_reset
 } = parentcategorySlice.actions;
 
 export default parentcategorySlice.reducer;
+
+
+// delet api call

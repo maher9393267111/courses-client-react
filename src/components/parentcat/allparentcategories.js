@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { open_modal, close_modal } from "../../redux/diff";
 import {parentcat_byid} from '../../redux/parentcategory';
+import{  deleteParentCat } from '../../redux/fetchapi';
 
 import {DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import Updateparentcat from "./updateparentcat";
@@ -24,12 +25,18 @@ dispatch(parentcat_byid(parencatid));
 
 
 
-
-
-
   }
 
  
+// delet api call
+const  deleteparencat = (parencatid) => {
+
+  dispatch( deleteParentCat(parencatid));
+
+  console.log("deelet button is clicked");
+}
+
+
 
 
 
@@ -73,14 +80,18 @@ className=" w-[66px] h-[77px]"
 
 <p className=" self-center">
 <DeleteOutlined
- onClick={()=>openModal(parentcat._id)}
+onClick={() => deleteparencat(parentcat._id)}
+
 
 className='   text-blue-400 cursor-pointer  hover:text-red-500  text-2xl font-bold' />
 </p>
 
 
 <p>
-<EditOutlined    className='   text-white cursor-pointer  bg-yellow-200 rounded-3xl p-2  hover:text-green-500  text-2xl font-bold' />
+<EditOutlined 
+ onClick={()=>openModal(parentcat._id)}
+
+className='   text-white cursor-pointer  bg-yellow-200 rounded-3xl p-2  hover:text-green-500  text-2xl font-bold' />
 </p>
 
 
