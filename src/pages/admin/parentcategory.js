@@ -13,7 +13,7 @@ import { Box, Button, Flex, Grid, Spacer } from "@chakra-ui/react";
 import { Input } from "antd";
 import { toast } from "react-toastify";
 
-const Parentcategory = () => {
+const  Parentcategor = () => {
   const fileref = useRef();
   const dispatch = useDispatch();
   const { userinfo, token } = useSelector((state) => state.user);
@@ -171,8 +171,8 @@ const Parentcategory = () => {
                       ref={fileref}
                     />
 
-                    <div className=" w-[75px] h-[20px]">
-                      <img src={imageshow} alt="" />
+                    <div className=" w-[75px] h-[55px]">
+                      <img className="w-full h-full  object-cover mt-5 rounded-xl ml-8" src={imageshow} alt="" />
                     </div>
                   </div>
 
@@ -206,4 +206,4 @@ const Parentcategory = () => {
   );
 };
 
-export default Parentcategory;
+export default Parentcategor;

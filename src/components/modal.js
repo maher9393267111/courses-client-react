@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { open_modal,close_modal} from '../../redux/diff';
+import { open_modal,close_modal} from '../redux/diff';
 
 const Modalcomp = ({children,title}) => {
 

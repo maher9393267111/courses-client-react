@@ -120,9 +120,9 @@ const res = API.delete(`/parentcat/removeparentcat/${parencatid}`).then((res) =>
 
 
 <div
-className=" w-[66px] h-[77px]"
+className=" w-[100px]  h-[77px]"
 >
-<img src={parentcat.image.secure_url} alt="" />
+<img className="w-full h-full object-cover rounded-2xl" src={parentcat.image.secure_url} alt="" />
 
 </div>
 

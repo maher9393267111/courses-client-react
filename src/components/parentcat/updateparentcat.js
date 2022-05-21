@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from "react";
-import ModalComp from "./modal";
+import ModalComp from "../modal";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

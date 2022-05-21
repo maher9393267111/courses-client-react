@@ -8,6 +8,7 @@ import Navbar from './components/navbar';
 import AdminDasboard from './pages/admin/dashboard';
 import Userprofile from './pages/userprofile';
 import Parentcategory from './pages/admin/parentcategory';
+import SubCategory from './pages/admin/subcategory';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -43,6 +44,7 @@ function App() {
 <Route path='/admindash' element={<AdminDasboard />} />
 <Route path='/userprofile/:id' element={<Userprofile />} />
 <Route path='/parentcat-create' element={<Parentcategory />} />
+<Route path='/subcat-create' element={<SubCategory />} />
 
 
 
