@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { open_modal, close_modal } from "../../redux/diff";
+
 import {parentcat_byid,fetch_all_parentcategory,singlecat_reset} from '../../redux/parentcategory';
 import axios from "axios";
 
@@ -25,7 +26,6 @@ dispatch(parentcat_byid(parencatid));
 
     dispatch(open_modal());
     console.log("open modal"); 
-
 
 
   }

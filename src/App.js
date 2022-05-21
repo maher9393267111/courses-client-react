@@ -44,7 +44,7 @@ function App() {
 <Route path='/admindash' element={<AdminDasboard />} />
 <Route path='/userprofile/:id' element={<Userprofile />} />
 <Route path='/parentcat-create' element={<Parentcategory />} />
-<Route path='/subcat-create' element={<SubCategory />} />
+<Route path='/sub-category' element={<SubCategory />} />
 
 
 
