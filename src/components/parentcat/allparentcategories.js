@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { open_modal, close_modal } from "../../redux/diff";
-import {parentcat_byid} from '../../redux/parentcategory';
-import{  deleteParentCat } from '../../redux/fetchapi';
+import {parentcat_byid,fetch_all_parentcategory,singlecat_reset} from '../../redux/parentcategory';
+import axios from "axios";
+
+
 
 import {DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import Updateparentcat from "./updateparentcat";
+import { toast } from "react-toastify";
 const Allparentcategories = () => {
   const dispatch = useDispatch();
-  const { allparentcategories } = useSelector((state) => state.parentcategory);
+  const { allparentcategories,singleparentcategory } = useSelector((state) => state.parentcategory);
 
   
   const  openModal = (parencatid) => {
@@ -27,13 +30,60 @@ dispatch(parentcat_byid(parencatid));
 
   }
 
+  const API = axios.create({ baseURL: 'http://localhost:5000/api' });
+
+  API.interceptors.request.use((req) => {
+    if (localStorage.getItem('usertoken')) {
+      req.headers.Authorization = `Bearer ${localStorage.getItem('usertoken')}`;
+    }
+  
+    return req;
+  });
+  
+  // const deleteParentCategory = (id) => API.delete(`/parentcat/removeparentcat/${id}`);
+
+
+
+
+
  
 // delet api call
 const  deleteparencat = (parencatid) => {
 
-  dispatch( deleteParentCat(parencatid));
+dispatch(parentcat_byid(parencatid));
 
-  console.log("deelet button is clicked");
+// delete aprentcat image from cloudinary
+
+const oldimage = singleparentcategory.image.public_id;
+
+const deleteimg  = API.post(`/parentcat/removeimage`,{image:oldimage} );
+
+
+// deelte parent category from server
+
+const res = API.delete(`/parentcat/removeparentcat/${parencatid}`).then((res) => {
+  console.log("delete parent category-->", res);
+  toast.success(res.data.message);
+ dispatch(singlecat_reset(parencatid));
+  
+}).then(()=>{
+ const allparentcat =API.get('/parentcat/allparentcats').then((res) => {
+    console.log("all parent categories-->", res);
+    localStorage.setItem("parentcat", JSON.stringify(res.data.parentcats));
+    dispatch(fetch_all_parentcategory());
+  });
+}).catch((err) => {
+  console.log(err);
+  toast.error(err.response.data.message);
+});
+
+// then fetch all parent categories again after delete one
+
+
+
+
+
+
 }
 
 

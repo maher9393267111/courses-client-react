@@ -16,6 +16,10 @@ export const deleteParentCategory = (id) => API.delete(`/parentcat/removeparentc
 
 export const fetchAllParentCategories = () => API.get('/parentcat/allParentCats');
 
+// delete old image from cloudinary
+
+export const deleteOldImageapi = (image) => API.post('/parentcat/removeimage', { image });
+
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 
 
