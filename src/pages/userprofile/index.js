@@ -74,7 +74,7 @@ const handleclick = async (event) => {
 
 // delete old image from cloudinary
 
-const image = userinfo.image.public_id;
+const image = userinfo?.image?.public_id;
 console.log("image", image);
 // destroy old image from cloudinary
 const oldimagedata = API.post(`/removeimage`,{image:image} );
@@ -150,7 +150,7 @@ const handleClickfile = (event) => {
 
 <div className=' text-center mb-[40px] mt-[25px] font-bold text-2xl'>
 
-<h1 className='  w-[222px] bg-blue-400 mx-auto text-white p-3 rounded-3xl'>{userinfo.name} Profile</h1>
+<h1 className='  w-[222px] bg-blue-400 mx-auto text-white p-3 rounded-3xl'>{userinfo?.name} Profile</h1>
 
 </div>
 
@@ -175,7 +175,7 @@ sm:col-span-12'>
 
 <div className=' w-[250px] h-[250px]'>
 
-{userinfo.image ? <img src={userinfo.image.secure_url} alt=""/> : <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""/>}
+{userinfo?.image ? <img src={userinfo?.image.secure_url} alt=""/> : <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""/>}
 
 
 
@@ -280,7 +280,7 @@ onClick={handleclick}
 
 <div className=' w-[175px] h-[200px]'>
 
-<img src={userinfo.image.secure_url} alt="" />
+<img src={userinfo?.image?.secure_url} alt="" />
 
 </div>
 
