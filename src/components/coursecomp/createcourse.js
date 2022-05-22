@@ -1,8 +1,12 @@
 import React from 'react';
 import { Form, Input, InputNumber, Button,Select }from 'antd';
 import {useState, useEffect} from 'react';
+import axios from "axios";
+import FileBase64 from "react-file-base64";
+
 import { useDispatch,useSelector } from 'react-redux';
 const { Option } = Select;
+
 
 const validateMessages = {
     required: '${label} is required!',
@@ -33,6 +37,8 @@ const [subcategory, setSubcategory] = useState("");
 
 const [lecturesnumber, setLecturesnumber] = useState("");
 
+const [togglebase, setTogglebase] = useState(false);
+
 const { subcategories } = useSelector((state) => state.subcategory);
 
 const { userinfo, token } = useSelector((state) => state.user);
@@ -51,8 +57,6 @@ const { allparentcategories } = useSelector((state) => state.parentcategory);
         setSubcategory(values.subcategory);
       };
 
-
-
     const layout = {
         labelCol: {
           span: 3,
@@ -62,6 +66,19 @@ const { allparentcategories } = useSelector((state) => state.parentcategory);
           span: 16,
         },
       };
+
+
+// handleimage change
+
+
+const getFiles = (files) => {
+    console.log(files);
+    setImage(files.base64);
+    console.log('get base64 files--->',image);
+    setTogglebase(true);
+    
+  };
+
 
 
 
@@ -207,6 +224,41 @@ className='mb-6 flex gap-2 mt-6 text-center'
     </div>
 
 
+{/* -----upload image- */}
+
+
+<div className='mt-4'>
+
+    <div>
+        <h1>Upload Image</h1>
+    </div>
+
+<div className=" mt-5">
+                <FileBase64
+                  multiple={false}
+                  onDone={getFiles}
+                  className="hidden mt-12"
+                //   ref={fileref}
+                />
+
+
+{/* show image pracddd*/}
+
+<div
+className='w-12 h-12 mt-3 mb-3 justify-center'
+>
+    <img src={image} alt="" />
+</div>
+
+
+              </div>
+
+
+
+</div>
+
+
+
 
 <div className='pb-24'>
 
@@ -217,6 +269,8 @@ className='mb-6 flex gap-2 mt-6 text-center'
         </Button>
         </Form.Item>
         </div>
+
+
 
 
         </Form>
