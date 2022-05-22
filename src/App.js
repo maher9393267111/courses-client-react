@@ -9,6 +9,7 @@ import AdminDasboard from './pages/admin/dashboard';
 import Userprofile from './pages/userprofile';
 import Parentcategory from './pages/admin/parentcategory';
 import SubCategory from './pages/admin/subcategory';
+import  Couurse from './pages/admin/course';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -45,6 +46,7 @@ function App() {
 <Route path='/userprofile/:id' element={<Userprofile />} />
 <Route path='/parentcat-create' element={<Parentcategory />} />
 <Route path='/sub-category' element={<SubCategory />} />
+<Route path='/create-course' element={<Couurse />} />
 
 
 

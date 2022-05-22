@@ -43,6 +43,18 @@ create category
 <li>
 
 </li>
+
+<li className='m'>
+    <Link to={'/create-course'}>
+create Course
+
+
+</Link>
+</li>
+
+
+
+
 <li className='m'>
     <Link to={'/product'}>
 

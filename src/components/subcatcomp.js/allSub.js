@@ -104,8 +104,8 @@ const AllSub = () => {
                     <h1 className=" font-bold text-xl">{sub?.name}</h1>
                     <h1 className=' mt-4 '>
  <span 
-className="  bg-teal-300 ml-3 p-1  rounded-3xl text-white   "
-> {sub?.parent_cat_id.name}.name</span>
+className="  bg-teal-600 ml-3 p-1  rounded-3xl text-white   "
+> {sub?.parent_cat_id.name}</span>
 
 
                     </h1>
