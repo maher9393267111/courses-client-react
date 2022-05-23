@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import {Select} from '@chakra-ui/react'
 import axios from "axios";
 import {toast} from "react-toastify";
-import {fetch_lectures} from '../../redux/lecture'
+import {fetch_lectures,update_execute} from '../../redux/lecture'
 
 
 const Createform = () => {
@@ -17,6 +17,11 @@ const [extend,setExtend] = useState(false);
 const [obj,setObj] = useState({});
 
 const {allcourses}  = useSelector((state) => state.course)
+
+const {updateExecute,singlelecture} = useSelector((state) => state.lecture)
+
+console.log("--------------------",updateExecute);
+
 const { userinfo, token } = useSelector((state) => state.user);
 
 const dispatch = useDispatch();
@@ -40,8 +45,22 @@ const handlesubmit = async (e) => {
     console.log('course------------>',course);
 
 
+
+// if updateExecute true  update if false create
+
+
+  
+
     try {
-      API.post("/create", {
+        const apitoggle = updateExecute ? `/update/${singlelecture._id}` : `/create`;
+        const  method = updateExecute ? API.put : API.post;
+
+      
+          
+         //   API.put(`/update/${updateExecute.id}`,{name,title,desc,url,course,extend})
+
+
+      method(apitoggle, {
      
         name,
       
@@ -88,7 +107,7 @@ title,
 <div className=' sm:text-center mt-4 ml-12 lg:text-left'>
 
 <h1 className=' font-bold text-xl '>
-create form  -----{course}   
+  {updateExecute ? 'update form ' : "create form"}   -----{course}   
 
 
 </h1>
@@ -198,7 +217,7 @@ onClick= {handlesubmit}
 
 className=' font-bold text-white bg-teal-500 p-2 rounded-full shadow-2xl w-[200px] mt-6 mb-6'>
 
-Createlecture  
+{ updateExecute ? 'update' : 'create'}
 
 </button>
 

@@ -2,7 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import AllLectures from './allLectures';
 import CreateForm from './createform';
+
 const Createlecture = () => {
+
+
+
+
+
     return (
         <div>
            <div>
