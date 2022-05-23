@@ -3,7 +3,7 @@ import {DeleteOutlined,EditOutlined} from '@ant-design/icons';
 import { useDispatch,useSelector } from 'react-redux';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { fetch_lectures } from '../../redux/lecture';
+import { fetch_lectures,update_execute } from '../../redux/lecture';
 import { toast } from 'react-toastify';
 const AllLectures = () => {
 
@@ -25,6 +25,18 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+
+
+// handle  update execute with specific id of lecture
+
+const handleUpdateExecute = async (id) => {
+
+dispatch(update_execute({exec:true,id}));
+
+
+
+
+}
 
 
 const handleremove = async (lectureid) => {
@@ -127,7 +139,10 @@ const handleremove = async (lectureid) => {
 <div>
 
 <div>
-<EditOutlined className='font-bold text-2xl mb-4 hover:text-green-600' />
+<EditOutlined
+onClick={() => handleUpdateExecute(lecture._id)}
+
+className='font-bold text-2xl mb-4 hover:text-green-600' />
 </div>
 
 <div>

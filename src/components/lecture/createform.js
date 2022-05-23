@@ -88,7 +88,7 @@ title,
 <div className=' sm:text-center mt-4 ml-12 lg:text-left'>
 
 <h1 className=' font-bold text-xl '>
-create form  {course}   
+create form  -----{course}   
 
 
 </h1>

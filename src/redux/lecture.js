@@ -11,7 +11,7 @@ toggle:false,
 open:false,
 message:'',
 courseid:'',
-namelecture:'maher'
+updateExecute:false,
 
    
   },
@@ -45,7 +45,17 @@ singlelecture_reset: (state, action) => {
 
 
   console.log("reset modal went here workkk in Reduxxx",state.singleparentcategory,state.toggle);
-}
+},
+
+update_execute: (state, action) => {
+  state.updateExecute = action.payload.exec;
+  const id = action.payload.id;
+  console.log(action.payload);
+  console.log(id);
+   const singlelecturefilter = state.allectures.filter(course => course._id === id);
+   state.singlelecture = singlelecturefilter[0];
+console.log(singlelecturefilter);
+},
 
 
 
@@ -61,7 +71,8 @@ export const {
     
     fetch_lectures,
     lecture_byid,
-    singlelecture_reset
+    singlelecture_reset,
+    update_execute
   
 
 
