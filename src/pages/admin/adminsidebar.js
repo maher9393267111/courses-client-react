@@ -56,7 +56,7 @@ create Course
 
 
 <li className='m'>
-    <Link to={'/product'}>
+    <Link to={'/lecture'}>
 
 create lecture
 

@@ -4,7 +4,7 @@ import userSlice from "./user";
   import diffSlice from "./diff";
   import subcategorySlice from "./sub-cat";
   import  courseSlice from "./course";
-
+import lectureSlice from "./lecture";
 export default configureStore({
   reducer: {
     user: userSlice,
@@ -12,6 +12,7 @@ export default configureStore({
      diff: diffSlice,
      subcategory: subcategorySlice,
       course: courseSlice,
+      lecture: lectureSlice,
    
 
   },

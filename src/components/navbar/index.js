@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {GrSearch} from 'react-icons/gr';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+
 // import { Menu } from 'antd';
 
 import {
@@ -139,8 +140,11 @@ className={ ` ${activeclass === 'home' ? 'active ' : " "}  self-center   `}>
 <Menu>
   {({ isOpen }) => (
     <>
-      <MenuButton isActive={isOpen} as={Button} rightIcon={<ChevronDownIcon />}>
-        {isOpen ? 'userInfo' : 'userInfo'}
+      <MenuButton
+      display={userinfo?.name  ? 'block' : 'none'}
+      
+      isActive={isOpen} as={Button} rightIcon={<ChevronDownIcon />}>
+        {isOpen ? userinfo?.name : 'userInfo'}
       </MenuButton>
       <MenuList>
         <MenuItem>

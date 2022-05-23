@@ -5,11 +5,13 @@ import { open_modal, close_modal } from "../../redux/diff";
 import { course_byid } from "../../redux/course";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Updatecourse from "./updatecourse";
+import { fetch_courses } from "../../redux/course";
 const Allcourses = () => {
   const dispatch = useDispatch();
-  const { allcourses } = useSelector((state) => state.course);
+  const { allcourses,singlecourse  } = useSelector((state) => state.course);
 
   // open modal
 
@@ -19,6 +21,65 @@ const Allcourses = () => {
     dispatch(open_modal());
     console.log("open modal in from allcourses");
   };
+
+
+  
+
+  
+  const { subcategories } = useSelector((state) => state.subcategory);
+
+  const { userinfo, token } = useSelector((state) => state.user);
+
+  const API = axios.create({ baseURL: "http://localhost:5000/api/course" });
+
+  API.interceptors.request.use((req) => {
+    if (token) {
+      req.headers.Authorization = `Bearer ${token}`;
+      //req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+  
+    return req;
+  });
+  
+
+//   dispatch(course_byid(courseid));
+
+
+    const handleDelete = async (courseid) => {
+        try {
+          // dispatch(course_byid(courseid));
+            await API.delete(`/removecourse/${courseid}`).then((res) => {
+                console.log("delete course", res);
+                toast.success("Course Deleted");
+                dispatch(course_byid(courseid));
+            })
+
+         
+       // then fetch all courses
+        .then(() => {
+          API.get("/allcourses").then((res) => {
+              console.log(
+                "RES ALL Courses",
+                res.data.courses,
+                "-----------",
+                res
+              );
+              localStorage.setItem("courses", JSON.stringify(res.data.courses));
+              dispatch(fetch_courses());
+            });
+          });
+        
+        }
+        
+        catch (error) {
+            toast.error("Error in Deleting Course");
+        }
+
+
+    }
+
+           
+
 
   return (
     <div>
@@ -48,7 +109,7 @@ const Allcourses = () => {
                           name:{" "}
                           <span className="  bg-green-200 rounded-full p-2">
                             {" "}
-                            {course.name.slice(1, 20)}{" "}
+                            {course.name.slice(0, 20)}{" "}
                           </span>
                         </h1>
 
@@ -77,7 +138,10 @@ const Allcourses = () => {
                       <div className=" self-center col-span-2">
                         <div className=" flex  gap-6">
                           <h1 className=" font-bold text-xl hover:text-red-500">
-                            <DeleteOutlined />
+                            <DeleteOutlined
+                            
+                            onClick= {() => handleDelete(course._id)}
+                            />
                           </h1>
 
                           <h1 className=" font-bold text-xl  hover:text-green-400">
