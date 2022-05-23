@@ -58,7 +58,7 @@ useEffect(() => {
 <div className=' ml-4'>
 
 <div className=' bg-green-300 p-4 font-bold text-2xl'>
-<h1 className=''>Home page</h1>
+<h1 className=' fixed'>Home page {entries.length}</h1>
 </div>
 
      
@@ -66,7 +66,7 @@ useEffect(() => {
 <div>
 
 <InfiniteScroll
-          dataLength={allcourses.length}
+          dataLength={entries.length}
           next={fetchData}
           hasMore={hasMore}
           loader={<h4>Loading...</h4>}
