@@ -80,19 +80,6 @@ title,
 
 
 
-// const handlesubmit = () => {
-
-
-
-
-//     // setName("");
-//     // setTitle("");
-//     // setDesc("");
-//     // setUrl("");
-//     // setCourse("");
-//     // setExtend(false);
-// }
-
 
     return (
         <div className=' min-h-[355px] sm:mb-[144px] lg: mb-10'>
